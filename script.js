@@ -1,7 +1,7 @@
 window.speechSynthesis.cancel();
-const textarea=document.querySelector("textarea");
-const button=document.querySelector("button");
-const animationHTML = `
+const textarea = document.querySelector("textarea"),
+  button = document.querySelector("button"),
+  animationHTML = `
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
@@ -13,38 +13,12 @@ const animationHTML = `
   <div class="bar"></div>
   <div class="bar"></div>
 `;
-let isSpeaking=true;
-function text2Speech(){
-        const synth = window.speechSynthesis;
-        const text = textarea.value;
-        if(text.length>0){
-            if (!synth.speaking && text) {
-            const utternace = new SpeechSynthesisUtterance(text);
-            synth.speak(utternace);
-            }
-            if (text.length > 50) {
-            if (synth.speaking && isSpeaking) {
-                button.innerText = "Pause";
-                synth.resume();
-                isSpeaking = false;
-            } else {
-                button.innerText = "Resume";
-                synth.pause();
-                isSpeaking = true;
-            }
-            } else {
-            isSpeaking = false;
-            button.innerHTML=animationHTML;
-            }
-            setInterval(() => {
-            if (!synth.speaking && !isSpeaking) {
-                isSpeaking = true;
-                button.innerText = "Convert to Speech";
-            }
-            });
-        }
-        else    
-            alert("Please enter some text");
-        
-}
+let isSpeaking = !0;
 
+function text2Speech() {
+  const e = window.speechSynthesis;
+  var a, i = textarea.value;
+  0 < i.length ? (!e.speaking && i && (a = new SpeechSynthesisUtterance(i), e.speak(a)), 50 < i.length ? isSpeaking = e.speaking && isSpeaking ? (button.innerText = "Pause", e.resume(), !1) : (button.innerText = "Resume", e.pause(), !0) : (isSpeaking = !1, button.innerHTML = animationHTML), setInterval(() => {
+    e.speaking || isSpeaking || (isSpeaking = !0, button.innerText = "Convert to Speech")
+  })) : alert("Please enter some text")
+}
