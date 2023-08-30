@@ -1,3 +1,4 @@
+window.speechSynthesis.cancel();
 const textarea=document.querySelector("textarea");
 const button=document.querySelector("button");
 const animationHTML = `
