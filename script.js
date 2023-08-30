@@ -41,9 +41,4 @@ function text2Speech(){
           }
         });
 }
-window.addEventListener('beforeunload', () => {
-    if (synth.speaking) {
-        synth.cancel();
-    }
-});
 
